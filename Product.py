@@ -1,23 +1,28 @@
 product = {
-    "apple": {
+    1: {
         "price": 5,
-        "in-stock": 50
+        "in-stock": 50,
+        "name": "Apple"
     },
-    "orange": {
+    2: {
         "price": 7,
-        "in-stock": 50
+        "in-stock": 50,
+        "name": "Orange"
     },
-    "dragon fruit": {
+    3: {
         "price": 10,
-        "in-stock": 25
+        "in-stock": 25,
+        "name": "Dragon fruit"
     },
-    "mango": {
+    4: {
         "price": 13,
-        "in-stock": 20
+        "in-stock": 20,
+        "name": "Mango"
     },
-    "pineapple ": {
+    5: {
         "price": 5,
-        "in-stock": 10
+        "in-stock": 10,
+        "name": "Pineapple"
     }
 }
 
