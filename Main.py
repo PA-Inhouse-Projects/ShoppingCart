@@ -37,7 +37,7 @@ class ShoppingCart():
         while True:
             self.quantity_number = self.check_int(input("Enter the Number of Quantity : "))
             if self.quantity_number > self.product.get(self.select_product).get("in-stock"):
-                print(f'Only {self.product.get(self.select_product).get("in-stock")} Items are available')
+                print(f'Only {self.product.get(self.select_product).get("in-stock")} Items are available.')
             else:
                 break
 
