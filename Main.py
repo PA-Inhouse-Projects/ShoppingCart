@@ -5,14 +5,22 @@ class ShoppingCart():
         self.cart = {}
         self.select_product = None
         self.quantity_number = 1
+        self.confirm = None
 
     def main(self):
-        self.display_product()
-        self.select_product_index()
-        self.get_number_of_item()
-        self.conform_order()
-        self.display_product()
-        self.display_cart()
+        while True:
+            self.display_product()
+            self.select_product_index()
+            self.get_number_of_item()
+            self.confirm_order()
+            self.display_product()
+            self.display_cart()
+            confirm_cart = input("Do you want to continue shopping?")
+            if confirm_cart.lower() in ['no', 'n']:
+                self.checkout = input("Do you want to buy the product?")
+                if self.checkout in ['yes', 'y']:
+                    self.checkout_cart()
+                    break
 
     def display_product(self):
         print("Product Details : ")
@@ -29,7 +37,7 @@ class ShoppingCart():
         while True:
             self.quantity_number = self.check_int(input("Enter the Number of Quantity : "))
             if self.quantity_number > self.product.get(self.select_product).get("in-stock"):
-                print(f'Only {self.product.get(self.select_product).get("in-stock")} Items are available')
+                print(f'Only {self.product.get(self.select_product).get("in-stock")} Items are available.')
             else:
                 break
 
@@ -39,7 +47,7 @@ class ShoppingCart():
         except ValueError:
             raise ValueError(f'Please Enter Integer Number')
 
-    def conform_order(self):
+    def confirm_order(self):
         self.confirm = input("Do you want to add to cart?")
         if self.confirm.lower() in ['yes', 'y']:
             self.cart[self.select_product] = {'quantity': self.quantity_number,
@@ -49,9 +57,13 @@ class ShoppingCart():
     def display_cart(self):
         print("Conform Cart ")
         print(f'{"Index": <5} {"Name": <20} {"quantity": <10} {"Total Price":0>2}')
+        num = 1
         for key, values in self.cart.items():
-            print(f'{self.select_product: <5} {self.product[self.select_product]["name"]: <20} {values.get("quantity"): <10} {values.get("total_price"):0>2}')
+            print(f'{num: <5} {self.product[key]["name"]: <20} {values.get("quantity"): <10} {values.get("total_price"):0>2}')
+            num += 1
 
+    def checkout_cart(self):
+        print("check out")
 
 if __name__ == '__main__':
     sc = ShoppingCart()
