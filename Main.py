@@ -1,7 +1,18 @@
 import Product
+import os
+import json
+import file_handler
+
+
+def parse_product_json():
+    base_file = os.path.dirname(__file__)
+    file_path = os.path.join(base_file, 'data', 'product.json')
+    return file_handler.parse_file(file_path)
+
+
 class ShoppingCart():
     def __init__(self):
-        self.product = Product.product
+        self.product = parse_product_json()
         self.cart = {}
         self.select_product = None
         self.quantity_number = 1
@@ -20,6 +31,7 @@ class ShoppingCart():
                 self.checkout = input("Do you want to buy the product?")
                 if self.checkout in ['yes', 'y']:
                     self.checkout_cart()
+                    self.product = parse_product_json()
                     break
 
     def display_product(self):
@@ -32,6 +44,7 @@ class ShoppingCart():
         self.select_product = self.check_int(input("Please Enter the Index Number : "))
         if not(0 < self.select_product <= len(self.product)):
              raise ValueError(f'Please Select Index from 1 to {len(self.product)}')
+        self.select_product = str(self.select_product)
 
     def get_number_of_item(self):
         while True:
