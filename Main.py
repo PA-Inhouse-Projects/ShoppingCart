@@ -1,18 +1,14 @@
-import Product
 import os
 import json
 import file_handler
 
-
-def parse_product_json():
-    base_file = os.path.dirname(__file__)
-    file_path = os.path.join(base_file, 'data', 'product.json')
-    return file_handler.parse_file(file_path)
+base_file = os.path.dirname(__file__)
+file_path = os.path.join(base_file, 'data', 'product.json')
 
 
 class ShoppingCart():
     def __init__(self):
-        self.product = parse_product_json()
+        self.product = file_handler.parse_file(file_path)
         self.cart = {}
         self.select_product = None
         self.quantity_number = 1
@@ -77,12 +73,11 @@ class ShoppingCart():
             print(f'{num: <5} {self.product[key]["name"]: <20} {values.get("quantity"): <10} {values.get("total_price"):0>2}')
             num += 1
             self.grand_total += values.get("total_price")
-        print("Grand total ", self.grand_total)
 
 
     def checkout_cart(self):
         print("\n\n\n Total Amount of All Product is ", self.grand_total)
-
+        file_handler.write_file(file_path, self.product)
 
 if __name__ == '__main__':
     sc = ShoppingCart()
