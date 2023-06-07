@@ -6,7 +6,7 @@ base_file = os.path.dirname(__file__)
 file_path = os.path.join(base_file, 'data', 'product.json')
 
 
-class ShoppingCart():
+class ShoppingCart:
     def __init__(self):
         self.product = file_handler.parse_file(file_path)
         self.cart = {}
@@ -27,7 +27,7 @@ class ShoppingCart():
                 self.checkout = input("Do you want to buy the product?")
                 if self.checkout in ['yes', 'y']:
                     self.checkout_cart()
-                    self.product = parse_product_json()
+                    self.product = file_handler.parse_file(file_path)
                     break
 
     def display_product(self):
@@ -78,6 +78,7 @@ class ShoppingCart():
     def checkout_cart(self):
         print("\n\n\n Total Amount of All Product is ", self.grand_total)
         file_handler.write_file(file_path, self.product)
+
 
 if __name__ == '__main__':
     sc = ShoppingCart()
