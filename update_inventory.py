@@ -20,16 +20,32 @@ class Inventory:
         self.confirm = None
 
     def main(self):
-        self.display_product()
-        self.select_product_index()
-        self.confirm_update()
-        self.display_product()
+        select_operation = input("What do you want to do? \n"
+                                 "For Updating current product type 1 \n"
+                                 "For Add new Product type 2 ")
+        if select_operation == 1:
+            self.display_product()
+            self.select_product_index()
+            self.confirm_update()
+        elif select_operation == "2":
+            self.add_product()
+            self.display_product()
+        else:
+            print("Choose Given Number")
 
     def display_product(self):
         print("Product Details : ")
         print(f'{"Index": <5} {"Name": <20} {"in-stock": <10} {"price":0>2}')
         for key, values in self.product.items():
             print(f'{key: <5} {values.get("name"): <20} {values.get("in-stock"): <10} {values.get("price"):0>2}')
+
+    def add_product(self):
+        product_name = input("Enter Product name : ")
+        product_stock = input("Enter Product Quantity : ")
+        product_price = input("Enter Product Price : ")
+        number = str(len(self.product)+1)
+        self.product[number] = {"name" : product_name, "in-stock" : product_stock, "price" : product_price}
+        file_handler.write_file(file_path, self.product)
 
     def select_product_index(self):
         self.select_product = self.check_int(input("Please Enter the Index Number : "))
@@ -49,6 +65,7 @@ class Inventory:
         if self.confirm.lower() in ['yes', 'y']:
             self.product[self.select_product]["in-stock"] += self.quantity_number
             file_handler.write_file(file_path, self.product)
+            self.display_product()
 
 
 if __name__ == '__main__':
