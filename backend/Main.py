@@ -1,5 +1,4 @@
 import os
-import json
 import file_handler
 
 base_file = os.path.dirname(__file__)
