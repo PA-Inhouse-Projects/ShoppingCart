@@ -19,21 +19,21 @@ class SQLClient:
         self.operation[operation]()
 
     def create_table(self):
-        list1 = []
+        column = []
         for key, value in self.data.get("fields").items():
-            list1.append(f"{key} {value}")
-        opr = f"CREATE TABLE IF NOT EXISTS {self.data.get('table_name')}({', '.join(list1)});"
+            column.append(f"{key} {value}")
+        opr = f"CREATE TABLE IF NOT EXISTS {self.data.get('table_name')}({', '.join(column)});"
         SQLClient.cur.execute(opr)
         SQLClient.con.commit()
 
     def insert_table(self):
-        list1 = []
-        list2 = []
+        column1 = []
+        value1 = []
         for key, value in self.data.get("fields").items():
-            list1.append(key)
-            list2.append(str(value))
+            column1.append(key)
+            value1.append(str(value))
 
-        opr = f"INSERT INTO {self.data.get('table_name')}({', '.join(list1)}) VALUES ({', '.join(list2)});"
+        opr = f"INSERT INTO {self.data.get('table_name')}({', '.join(column1)}) VALUES ({', '.join(value1)});"
         SQLClient.cur.execute(opr)
         SQLClient.con.commit()
 
